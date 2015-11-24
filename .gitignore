@@ -38,3 +38,4 @@ Thumbs.db
 
 dist
 *.sublime-workspace
+.publish

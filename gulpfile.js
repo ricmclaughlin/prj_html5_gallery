@@ -58,14 +58,21 @@ gulp.task('deploy', function() {
     .pipe(ghPages());
 });
 
-gulp.task('browser-sync', function() {
+gulp.task('serve', function() {
     browserSync.init({
-        server: {
-            baseDir: "./" + dest
-        }
+      server: {
+        baseDir: "./" + dest
+      }
     });
+    gulp.watch("css/**/*.scss", ['sass-watch']);
+    gulp.watch("js/**/*.js", ['scripts-watch']);
+    gulp.watch("./*.html", ['move-watch']);
+    //gulp.watch("./*.html").on('change', browserSync.reload);
 });
 
+gulp.task('sass-watch', ['sass'], browserSync.reload);
+gulp.task('scripts-watch', ['scripts'], browserSync.reload);
+gulp.task('move-watch', ['move'], browserSync.reload);
 
-gulp.task('default', ['clean', 'move', 'scripts', 'sass', 'browser-sync']);
+gulp.task('default', ['clean', 'move', 'scripts', 'sass', 'serve']);
 gulp.task('gh-pages', ['clean', 'move', 'scripts', 'sass', 'deploy']);
