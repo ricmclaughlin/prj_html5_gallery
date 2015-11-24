@@ -7,6 +7,7 @@ var rename = require('gulp-rename');
 var sass = require('gulp-sass');
 var del = require('del');
 var browserSync = require('browser-sync').create();
+var ghPages = require('gulp-gh-pages');
 // var clean = require('gulp-clean');
 // var concat = require('gulp-concat');
 
@@ -23,7 +24,7 @@ var filesToMove = [
         './*.html',
         './.htaccess',
         './*.txt',
-        './img/*.*'
+        './img/**/*.*'
     ];
 
 
@@ -67,3 +68,4 @@ gulp.task('browser-sync', function() {
 
 
 gulp.task('default', ['clean', 'move', 'scripts', 'sass', 'browser-sync']);
+gulp.task('gh-pages', ['clean', 'move', 'scripts', 'sass', 'deploy']);
