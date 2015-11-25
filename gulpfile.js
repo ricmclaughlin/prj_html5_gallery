@@ -27,9 +27,16 @@ var filesToMove = [
         './img/**/*.*'
     ];
 
+var scriptsToDo = [
+  './js/modernizr-2.8.3.min.js',
+  './js/jquery.js',
+  './js/plugins.js',
+  './js/main.js'
+]
+
 
 gulp.task('scripts', function () {
-  return gulp.src('js/**/*.js')
+  return gulp.src(scriptsToDo)
   .pipe(concat('main.js'))
   .pipe(rename({suffix: '.min'}))
   .pipe(uglify())
@@ -43,7 +50,7 @@ gulp.task('sass', function(){
 });
 
 gulp.task('move', function(){
-  gulp.src(filesToMove, { base: './' })
+  return gulp.src(filesToMove, { base: './' })
   .pipe(gulp.dest(dest));
 });
 
