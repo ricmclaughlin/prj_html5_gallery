@@ -22,7 +22,6 @@ var sassOptions = {
 var filesToMove = [
         './*.png',
         './*.html',
-        './.htaccess',
         './*.txt',
         './img/**/*.*'
     ];
@@ -61,7 +60,7 @@ gulp.task('clean', function () {
 });
 
 gulp.task('deploy', function() {
-  return gulp.src(dest + '**/*')
+  return gulp.src('./dist/**/*')
     .pipe(ghPages());
 });
 
@@ -82,4 +81,5 @@ gulp.task('scripts-watch', ['scripts'], browserSync.reload);
 gulp.task('move-watch', ['move'], browserSync.reload);
 
 gulp.task('default', ['clean', 'move', 'scripts', 'sass', 'serve']);
-gulp.task('gh-pages', ['clean', 'move', 'scripts', 'sass', 'deploy']);
+gulp.task('build', ['clean', 'move', 'scripts', 'sass']);
+
